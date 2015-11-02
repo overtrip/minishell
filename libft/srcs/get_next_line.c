@@ -6,16 +6,15 @@
 /*   By: cletiche <cletiche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/03 18:16:32 by cletiche          #+#    #+#             */
-/*   Updated: 2015/10/01 19:10:01 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/02 17:26:56 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "libft.h"
 
 static t_read	*addlistitem(t_read *list, int fd)
 {
-	t_read				*tmp;
+	t_read	*tmp;
 
 	tmp = (t_read *)malloc(sizeof(*list));
 	if (tmp)
@@ -57,7 +56,7 @@ static int		reading(int fd, char **len, t_read **node)
 	return (1);
 }
 
-int		get_next_line(int const fd, char **line)
+int				get_next_line(int const fd, char **line)
 {
 	static t_read	*first;
 	t_read			*node;

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/01 17:39:36 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/02 16:30:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_list	*ft_my_split_list(t_list *list, char *buff, int size)
 			list = list->next;
 		list->next = ft_create_elem(tmp);
 	}
-	return list;
+	return (list);
 }
 
 t_list	*ft_lex(char *buff, t_list *list)
@@ -62,18 +62,20 @@ t_list	*ft_lex(char *buff, t_list *list)
 	}
 	if (!*buff)
 		list = ft_my_split_list(list, tmp, (buff - tmp));
-	return list;
+	return (list);
 }
 
 int		main(int argc, char **argv, char **env)
 {
 	char	*buff;
+	char	**local_env;
 	t_list	*list;
 
 	(void)argc;
 	(void)argv;
 	buff = NULL;
 	list = NULL;
+	ft_get_env(&local_env, env);
 	while (1)
 	{
 		ft_putstr("?> ");
