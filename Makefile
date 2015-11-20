@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/11/01 17:13:56 by jealonso         ###   ########.fr        #
+#    Updated: 2015/11/20 17:36:37 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ NAME 		= ft_minishell1
 #SRCRS:
 SRCS 		= \
 	   	main.c \
+		ft_change_env.c \
 	   	ft_display_env.c \
 
 #OBJ:

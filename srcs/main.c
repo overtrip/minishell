@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/17 14:06:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/20 17:37:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int		main(int argc, char **argv, char **env)
 	(void)argv;
 	buff = NULL;
 	list = NULL;
-	ft_get_env(local_env, env);
+	local_env = NULL;
+	ft_init_env(local_env, env);
 	while (1)
 	{
 		ft_putstr("?> ");
@@ -83,7 +84,7 @@ int		main(int argc, char **argv, char **env)
 		{
 			list = ft_lex(buff, list);
 			ft_putendl(list->data);
-			ft_search_in_list(list, env);
+			ft_search_in_list(list, local_env);
 		}
 	}
 	return (0);
