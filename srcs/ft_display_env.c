@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/20 18:42:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/25 17:54:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ int		ft_count_env(char **env)
 	return (count);
 }
 
-void	ft_linker(t_list *list, t_list *new)
+void	ft_linker(t_list **list, t_list *new)
 {
 	t_list	*begin;
 
-	begin = list;
-	if (list)
+	begin = (*list);
+	if ((*list))
 	{
-		while (list->next)
-			list = list->next;
-		list->next = new;
-		list = begin;
+		while ((*list)->next)
+			(*list) = (*list)->next;
+		(*list)->next = new;
+		(*list) = begin;
 	}
 	else
-		list = new;
+		(*list) = new;
 }

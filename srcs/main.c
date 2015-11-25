@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/20 17:37:04 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/25 17:54:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,27 @@ t_list	*ft_create_elem(char *data)
 	return (new);
 }
 
-t_list	*ft_my_split_list(t_list *list, char *buff, int size)
+t_list	*ft_my_split_list(t_list **list, char *buff, int size)
 {
 	t_list	*begin;
 	char	*tmp;
 
-	begin = list;
+	begin = (*list);
 	if ((tmp = (char *)malloc(sizeof(char) * size)))
 		tmp = ft_strncpy(tmp, buff, size);
-	if (!list)
-		list = ft_create_elem(tmp);
+	if (!(*list))
+		(*list) = ft_create_elem(ft_strtrim(tmp));
 	if (begin)
 	{
-		while (list->next)
-			list = list->next;
-		list->next = ft_create_elem(tmp);
+		while ((*list)->next)
+			(*list) = (*list)->next;
+		(*list)->next = ft_create_elem(ft_strtrim(tmp));
+		(*list) = begin;
 	}
-	return (list);
+	return ((*list));
 }
 
-t_list	*ft_lex(char *buff, t_list *list)
+void	ft_lex(char *buff, t_list **list)
 {
 	char	*tmp;
 	int		parite;
@@ -55,14 +56,26 @@ t_list	*ft_lex(char *buff, t_list *list)
 			parite = 0;
 		if (*buff == ';' && !parite)
 		{
-			list = ft_my_split_list(list, tmp, (buff - tmp));
+			*list = ft_my_split_list(list, tmp, (buff - tmp));
 			tmp = ++buff;
 		}
 		++buff;
 	}
 	if (!*buff)
-		list = ft_my_split_list(list, tmp, (buff - tmp));
-	return (list);
+		*list = ft_my_split_list(list, tmp, (buff - tmp));
+}
+
+void	ft_free_list(t_list **list)
+{
+	t_list	*tmp;
+
+	while ((*list))
+	{
+		tmp = (*list);
+		(*list) = (*list)->next;
+		free(tmp->data);
+		free(tmp);
+	}
 }
 
 int		main(int argc, char **argv, char **env)
@@ -73,19 +86,23 @@ int		main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	(void)env;
 	buff = NULL;
 	list = NULL;
 	local_env = NULL;
-	ft_init_env(local_env, env);
+	//	ft_init_env(&local_env, env);
 	while (1)
 	{
 		ft_putstr("?> ");
 		if (get_next_line(0, &buff) > 0)
 		{
-			list = ft_lex(buff, list);
-			ft_putendl(list->data);
+			ft_lex(buff, &list);
 			ft_search_in_list(list, local_env);
+			free(buff);
+			ft_free_list(&list);
 		}
 	}
+	ft_free_list(&local_env);
+	free(&buff);
 	return (0);
 }
