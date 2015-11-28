@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2015/10/31 15:00:30 by jealonso         ###   ########.fr        #
+#    Updated: 2015/11/28 18:02:39 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ OBJSPATH = objs
 SRCS = \
 	ft_atoi.c \
 	ft_bzero.c \
+	ft_create_elem.c \
 	ft_isalnum.c \
 	ft_isalpha.c \
 	ft_isascii.c \
@@ -39,6 +40,8 @@ SRCS = \
 	ft_isprint.c \
 	ft_isupper.c \
 	ft_itoa.c \
+	ft_lst_push_back.c \
+	ft_lstadd.c \
 	ft_memalloc.c \
 	ft_memccpy.c \
 	ft_memchr.c \
@@ -52,6 +55,7 @@ SRCS = \
 	ft_putchar_l.c \
 	ft_putendl.c \
 	ft_putendl_fd.c \
+	ft_putlist.c \
 	ft_putnbr.c \
 	ft_putnbr_fd.c \
 	ft_putnbr_long.c \
@@ -75,6 +79,7 @@ SRCS = \
 	ft_strncat.c \
 	ft_strncmp.c \
 	ft_strncpy.c \
+	ft_strndup.c \
 	ft_strnequ.c \
 	ft_strnew.c \
 	ft_strnstr.c \

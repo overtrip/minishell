@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_display_env.c                                   :+:      :+:    :+:   */
+/*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/28 18:09:28 by jealonso         ###   ########.fr       */
+/*   Created: 2015/11/26 15:31:50 by jealonso          #+#    #+#             */
+/*   Updated: 2015/11/26 15:35:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_1.h"
+# include "libft.h"
 
-int		ft_count_env(char **env)
+t_list	*ft_create_elem(char *data)
 {
-	int	count;
+	t_list	*new;
 
-	count = 0;
-	if (env)
-		while (env++)
-			++count;
-	return (count);
+	if (!(new = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+	new->data = data;
+	new->next = NULL;
+	return (new);
 }

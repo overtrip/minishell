@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/17 13:54:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/28 17:54:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ typedef struct		s_read
 	struct s_read	*next;
 }					t_read;
 
+int		ft_atoi(char *str);
 int		get_next_line(int const fd, char **line);
 void	ft_bzero(void *s, size_t n);
+t_list	*ft_create_elem(char *data);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -48,7 +50,7 @@ int		ft_islower(int c);
 int		ft_isprint(int c);
 int		ft_isupper(int c);
 char	*ft_itoa(int n);
-int		ft_listadd(t_list **begin, t_list *current);
+t_list  *ft_list_push_back(t_list *list, t_list *new);
 void	*ft_memalloc(size_t size);
 void	*ft_memccpy(void *s1, const void *s2, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -62,6 +64,7 @@ int		ft_putchar_fd(char c, int fd);
 void	ft_putchar_l(char c);
 void	ft_putendl(char const *s);
 void	ft_putendl_fd(char const *s, int fd);
+void	ft_putlist(t_list *list);
 void	ft_putnbr(int n);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr(char const *s);
@@ -81,6 +84,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *c);
+char	*ft_strndup(const char *s1, int count);
 char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strncat(char *dest, const char *src, int nb);

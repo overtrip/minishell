@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_putlist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 14:58:38 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/10 15:49:50 by jealonso         ###   ########.fr       */
+/*   Created: 2015/11/28 17:51:39 by jealonso          #+#    #+#             */
+/*   Updated: 2015/11/28 18:07:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "libft.h"
 
-void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+void	ft_putlist(t_list *list)
 {
-	if (*alst)
-		(*del)((*alst)->content, (*alst)->content_size);
-	ft_memdel((void **)alst);
+	t_list	*begin;
+
+	begin = list;
+	if (list)
+	{
+		while (list->next)
+		{
+			ft_putendl(list->data);
+			list = list->next;
+		}
+		ft_putendl(list->data);
+	}
+	list = begin;
 }

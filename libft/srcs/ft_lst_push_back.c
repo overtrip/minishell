@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lst_push_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 15:10:16 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/10 16:09:26 by jealonso         ###   ########.fr       */
+/*   Created: 2015/11/26 15:28:13 by jealonso          #+#    #+#             */
+/*   Updated: 2015/11/26 15:49:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+t_list	*ft_list_push_back(t_list *list, t_list *new)
 {
-	if (*alst)
-		ft_lstdel(&((*alst)->next), del);
-	ft_lstdelone(*alst, del);
+	t_list	*begin;
+
+	begin = list;
+	if (list)
+	{
+		while (list->next)
+			list = list->next;
+		list->next = new;
+	}
+	else
+		list = new;
+	return (list);
 }

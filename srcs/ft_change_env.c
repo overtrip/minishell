@@ -6,11 +6,12 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/25 17:54:11 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/28 18:31:03 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
+#include <stdio.h>
 
 void	ft_setenv(t_list **env, char *str1, char *str2)
 {
@@ -43,6 +44,21 @@ void	ft_unset_env(t_list *begin, char *str)
 	}
 }
 
+char	*ft_get_env(t_list **env, char *str)
+{
+	int	i;
+
+	i = 0;
+	//ft_putlist(*env);
+	while ((*env)->next)
+	{
+		if (ft_strstr((*env)->data, str))
+			return (str);
+		(*env) = (*env)->next;
+	}
+	return (NULL);
+}
+
 void	ft_env(t_list **env)
 {
 	uid_t			uid;
@@ -50,19 +66,16 @@ void	ft_env(t_list **env)
 	int				i;
 
 	i = 0;
-	while ((*env) && i++)
+	while (*env)
 	{
-		if (i == 40)
-			return ;
-	ft_putendl((*env)->data);
-		if (!ft_strstr((*env)->data, "PATH"))
+		if (!ft_get_env(env, "PATH"))
 			ft_setenv(env, "PATH",
 					"/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin");
-		if (!ft_strstr((*env)->data, "SHLVL"))
+		if (!ft_get_env(env, "SHLVL"))
 			ft_setenv(env, "SHLVL", "1");
-		if (!ft_strstr((*env)->data, "TERM"))
+		if (!ft_get_env(env, "TERM"))
 			ft_setenv(env, "TERM", "dumb");
-		if (!ft_strstr((*env)->data, "USER"))
+		if (!ft_get_env(env, "USER"))
 		{
 			uid = getuid();
 			pw = getpwuid(uid);
@@ -70,7 +83,6 @@ void	ft_env(t_list **env)
 				ft_setenv((*env)->data, "USER", pw->pw_name);
 		}
 		(*env) = (*env)->next;
-		//TODO boucle infini sur SHLVL regle avec le if i = 40 WTF ?!?!?!?!
 	}
 }
 
@@ -78,26 +90,31 @@ void	ft_init_env(t_list **local_env, char **env)
 {
 	while (*env)
 	{
-		ft_linker(local_env, ft_create_elem(*env));
+		if (!(*local_env))
+			(*local_env) = ft_create_elem(*env);
+		else
+			ft_list_push_back((*local_env), ft_create_elem(*env));
 		++env;
 	}
 	ft_env(local_env);
 }
 
-void	ft_search_in_list(t_list *list, t_list *env)
+void	ft_search_in_list(t_list *list, t_list **local_env)
 {
 	if (list)
 	{
+		ft_putendl(list->data);
 		while (list)
 		{
-			ft_putendl(list->data);
-			if (ft_strcmp(ft_strtrim(list->data), "env") == 0)
-				ft_display_env(env);
-			if (ft_strcmp(ft_strtrim(list->data), "unset") == 0)
-				ft_unset_env(env,list->data);
-			if (ft_strcmp(ft_strtrim(list->data), "exit") == 0)
+			if (ft_strcmp(list->data, "env") == 0)
+				ft_putlist(*local_env);
+			if (ft_strcmp(list->data, "unset") == 0)
+				ft_unset_env(*local_env,list->data);
+			if (ft_strcmp(list->data, "exit") == 0)
 				exit(0);
 			list = list->next;
 		}
 	}
+	else
+		ft_putendl("pas de list");
 }

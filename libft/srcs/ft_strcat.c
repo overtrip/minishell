@@ -6,24 +6,22 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 20:03:23 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/08 11:15:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/28 17:56:18 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcat(char *dest, char *src)
 {
 	int a;
-	int b;
 
 	a = 0;
-	b = 0;
 	while (dest[a] != '\0')
 		a++;
-	while (src[b] != '\0')
+	while (*src)
 	{
-		dest[a] = src[b];
-		b++;
+		dest[a] = *src;
 		a++;
+		++src;
 	}
 	dest[a] = '\0';
 	return (dest);
