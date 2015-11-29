@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 15:50:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/29 15:55:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# define BUF_SIZE	1
+# define BUF_SIZE	1024
 # define RESET		"\e[0m"
 # define BLUE		"\e[0;34m"
 # define RED		"\e[0;31m"

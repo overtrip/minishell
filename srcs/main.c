@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 15:51:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/29 17:01:57 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,15 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 	{
 		while (list)
 		{
-		ft_putendl(list->data);
+		//ft_putendl(list->data);
 			if (!ft_strcmp(list->data, "env"))
 				ft_putlist(*local_env);
-			if (!ft_strcmp(list->data, "unset"))
-				ft_unset_env(local_env, (*local_env)->data);
+			if (!ft_strcmp(list->data, "unsetenv"))
+				ft_unset_env(local_env, ft_cut_str(list->data, ' '));
 			if (!ft_strcmp(list->data, "exit"))
 				exit(0);
+			if (ft_strstr(list->data, "setenv"))
+				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
 			list = list->next;
 		}
 	}
