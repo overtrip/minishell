@@ -6,22 +6,22 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/28 18:53:48 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/29 15:51:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
-#include <stdio.h>
-void	ft_my_split_list(t_list **list, char *buff, int size)
+
+static void	ft_my_split_list(t_list **list, char *buff, int size)
 {
 	char	*tmp;
 
 	if (!(tmp = ft_strndup(buff, size)))
 		return ;
-	(*list) = ft_list_push_back((*list), ft_create_elem(ft_strtrim(tmp)));
+	ft_list_push_back(list, ft_create_elem(ft_strtrim(tmp)));
 }
 
-void	ft_lex(char *buff, t_list **list)
+static void	ft_lex(char *buff, t_list **list)
 {
 	char	*tmp;
 	int		parite;
@@ -43,7 +43,7 @@ void	ft_lex(char *buff, t_list **list)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
 
-void	ft_free_list(t_list **list)
+static void	ft_free_list(t_list **list)
 {
 	t_list	*tmp;
 
@@ -56,7 +56,25 @@ void	ft_free_list(t_list **list)
 	}
 }
 
-int		main(int argc, char **argv, char **env)
+static void	ft_search_in_list(t_list *list, t_list **local_env)
+{
+	if (list)
+	{
+		while (list)
+		{
+		ft_putendl(list->data);
+			if (!ft_strcmp(list->data, "env"))
+				ft_putlist(*local_env);
+			if (!ft_strcmp(list->data, "unset"))
+				ft_unset_env(local_env, (*local_env)->data);
+			if (!ft_strcmp(list->data, "exit"))
+				exit(0);
+			list = list->next;
+		}
+	}
+}
+
+int			main(int argc, char **argv, char **env)
 {
 	char	*buff;
 	t_list	*local_env;
@@ -64,7 +82,6 @@ int		main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	(void)env;
 	buff = NULL;
 	list = NULL;
 	local_env = NULL;
@@ -76,11 +93,9 @@ int		main(int argc, char **argv, char **env)
 		{
 			ft_lex(buff, &list);
 			ft_search_in_list(list, &local_env);
-			free(buff);
-			ft_free_list(&list);
 		}
+		free(buff);
+		ft_free_list(&list);
 	}
-	ft_free_list(&local_env);
-	free(&buff);
 	return (0);
 }
