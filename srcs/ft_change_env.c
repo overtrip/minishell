@@ -6,13 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 17:54:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/11/29 17:58:13 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
 
- void		ft_setenv(t_list **env, char *str1, char *str2)
+void		ft_setenv(t_list **env, char *str1, char *str2)
 {
 	t_list	*new;
 	t_list	*save;
@@ -24,11 +24,9 @@
 		save = (*env);
 		while ((*env)->next)
 		{
-			if (ft_strstr((*env)->data, ft_strndup(str1, ft_strchr(str1, '=') - str1)))
-			{
+			if (ft_strstr((*env)->data,
+						ft_strndup(str1, ft_strchr(str1, '=') - str1)))
 				(*env)->data = ft_strdup(str1);
-				//TODO regler la condition pour entrer dedans si lelement existe deja et le changer
-			}
 			(*env) = (*env)->next;
 		}
 		(*env) = save;
@@ -73,15 +71,6 @@ static void	ft_env(t_list **env)
 		if (pw)
 			ft_setenv((*env)->data, "USER=", pw->pw_name);
 	}
-}
-
-char		*ft_cut_str(char *str, char c)
-{
-	if (str)
-		while (*str && *str != c)
-			++str;
-	++str;
-	return (ft_strcpy(str, str));
 }
 
 void		ft_init_env(t_list **local_env, char **env)
