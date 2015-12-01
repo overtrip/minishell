@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/11/20 17:36:37 by jealonso         ###   ########.fr        #
+#    Updated: 2015/12/01 16:20:22 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ CFLAGS		= -Wall -Wextra -Werror
 PATHLIB		= -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 
 #EXECUTALE:
-NAME 		= ft_minishell1
+NAME 		= ft_minishell
 
 #SRCRS:
 SRCS 		= \

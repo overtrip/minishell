@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/01 16:05:47 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/01 17:47:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,22 +86,27 @@ void		ft_init_env(t_list **local_env, char **env)
 	ft_env(local_env);
 }
 
-void		ft_unset_env(t_list **env, char *str)
+t_list		*ft_unset_env(t_list **env, char *str)
 {
 	t_list	*begin;
-	t_list	*save;
 
-	begin = (*env);
-	while ((*env)->next)
+	if (!(*env))
+		return (NULL);
+	begin = ft_unset_env(&((*env)->next), str);
+	if ((ft_strstr(ft_begin_str((*env)->data, '='), ft_cut_str(str, ' '))))
 	{
-		if ((ft_strstr((*env)->data, ft_cut_str(str, ' '))))
-		{
-			save = (*env)->next;
-			free((*env)->data);
-			free((*env));
-			(*env) = save;
-		}
-		(*env) = (*env)->next;
+		ft_putendl("------------0--------------");
+		free((*env)->data);
+		ft_putendl("------------1--------------");
+		free((*env));
+		ft_putendl("------------2--------------");
+		*env = begin;
+		ft_putendl("------------3--------------");
+		return ((*env));
 	}
-	(*env) = begin;
+	else
+	{
+		(*env)->next = begin;
+		return (begin);
+	}
 }
