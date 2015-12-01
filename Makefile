@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/12/01 16:20:22 by jealonso         ###   ########.fr        #
+#    Updated: 2015/12/01 18:17:52 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@
 .PHONY: all re clean fclean cleanlib cleanall fleme
 
 #BINARIES:
-CC		= /usr/bin/clang
-RM		= /bin/rm
-GIT		= /usr/bin/git
+CC			= /usr/bin/clang
+RM			= /bin/rm
+GIT			= /usr/bin/git
 MAKE		= /usr/bin/make
 MKDIR		= /bin/mkdir
 

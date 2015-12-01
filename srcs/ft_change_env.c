@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/01 17:47:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/01 18:14:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void		ft_init_env(t_list **local_env, char **env)
 	}
 	ft_env(local_env);
 }
-
+# include <stdio.h>
 t_list		*ft_unset_env(t_list **env, char *str)
 {
 	t_list	*begin;
@@ -95,6 +95,9 @@ t_list		*ft_unset_env(t_list **env, char *str)
 	begin = ft_unset_env(&((*env)->next), str);
 	if ((ft_strstr(ft_begin_str((*env)->data, '='), ft_cut_str(str, ' '))))
 	{
+		ft_putendl("---------------------------");
+		printf("(*env)->data -> [%s]\n ft_begin_str((*env)->data, '=') -> [%s]\n str ->[%s]\n",(*env)->data,ft_begin_str((*env)->data, '='), str);
+		ft_putendl("---------------------------");
 		ft_putendl("------------0--------------");
 		free((*env)->data);
 		ft_putendl("------------1--------------");
