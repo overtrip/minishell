@@ -6,42 +6,12 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/02 16:23:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/02 16:35:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
 #include <stdio.h>
-
-void		ft_setenv(t_list **env, char *str1, char *str2)
-{
-	t_list	*new;
-	t_list	*save;
-	char	*tmp;
-
-	tmp = ft_strjoin(str1, str2);
-	if (*env)
-	{
-		save = (*env);
-		while ((*env)->next)
-		{
-			if (ft_strstr((*env)->data,
-						ft_strndup(str1, ft_strchr(str1, '=') - str1)))
-			{
-				(*env)->data = ft_strdup(str1);
-				*env = save;
-				return ;
-			}
-			(*env) = (*env)->next;
-		}
-		(*env) = save;
-	}
-	new = ft_create_elem(tmp);
-	new->next = *env;
-	*env = new;
-	free(tmp);
-}
-
 
 static char	*ft_get_env(t_list *env, char *str)
 {
@@ -112,4 +82,33 @@ t_list		*ft_unset_env(t_list **env, char *str)
 		(*env)->next = begin;
 		return (*env);
 	}
+}
+
+void		ft_setenv(t_list **env, char *str1, char *str2)
+{
+	t_list	*new;
+	t_list	*save;
+	char	*tmp;
+
+	tmp = ft_strjoin(str1, str2);
+	if (*env)
+	{
+		save = (*env);
+		while ((*env)->next)
+		{
+			if (ft_strstr((*env)->data,
+						ft_strndup(str1, ft_strchr(str1, '=') - str1)))
+			{
+				(*env)->data = ft_strdup(str1);
+				*env = save;
+				return ;
+			}
+			(*env) = (*env)->next;
+		}
+		(*env) = save;
+	}
+	new = ft_create_elem(tmp);
+	new->next = *env;
+	*env = new;
+	free(tmp);
 }

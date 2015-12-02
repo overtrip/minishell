@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/01 17:47:13 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/02 16:33:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_cut_str(char *str, char c)
 	return (ft_strcpy(str, str));
 }
 
-char	*ft_begin_str(char	*str, char c)
+char	*ft_begin_str(char *str, char c)
 {
 	char	*begin;
 
@@ -40,4 +40,17 @@ char	*ft_begin_str(char	*str, char c)
 	while (*str && *str != c)
 		++str;
 	return (ft_strndup(begin, str - begin));
+}
+
+void	ft_free_list(t_list **list)
+{
+	t_list	*tmp;
+
+	while ((*list))
+	{
+		tmp = (*list);
+		(*list) = (*list)->next;
+		free(tmp->data);
+		free(tmp);
+	}
 }

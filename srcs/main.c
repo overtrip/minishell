@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/02 16:23:25 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/02 17:50:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,13 @@ static void	ft_lex(char *buff, t_list **list)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
 
-static void	ft_free_list(t_list **list)
-{
-	t_list	*tmp;
-
-	while ((*list))
-	{
-		tmp = (*list);
-		(*list) = (*list)->next;
-		free(tmp->data);
-		free(tmp);
-	}
-}
-
 static void	ft_exec_cd(char *cd)
 {
-		if ((chdir(ft_cut_str(cd, ' ')) < 0))
-			ft_putendl("\t/!\\ An error occurred");
+	if ((chdir(ft_cut_str(cd, ' ')) < 0))
+		ft_putendl("\t/!\\ An error occurred");
 }
 
-static void	ft_search_in_list(t_list *list, t_list **local_env)
+static void	ft_search_in_list(t_list *list, t_list **local_env, char *av)
 {
 	if (list)
 	{
@@ -79,6 +66,9 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
 			if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
 				ft_exec_cd(list->data);
+			else if (!(execve(av, list->data, (*local_env)->data)))
+				ft_putendl("lol");
+			//TODO create execve function
 			list = list->next;
 		}
 	}
@@ -91,7 +81,7 @@ int			main(int argc, char **argv, char **env)
 	t_list	*list;
 
 	(void)argc;
-	(void)argv;
+	//(void)argv;
 	buff = NULL;
 	list = NULL;
 	local_env = NULL;
@@ -102,7 +92,7 @@ int			main(int argc, char **argv, char **env)
 		if (get_next_line(0, &buff) > 0)
 		{
 			ft_lex(buff, &list);
-			ft_search_in_list(list, &local_env);
+			ft_search_in_list(list, &local_env, argv[0]);
 		}
 		free(buff);
 		ft_free_list(&list);
