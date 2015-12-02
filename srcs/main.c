@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/01 17:47:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/02 16:23:25 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ static void	ft_free_list(t_list **list)
 	}
 }
 
+static void	ft_exec_cd(char *cd)
+{
+		if ((chdir(ft_cut_str(cd, ' ')) < 0))
+			ft_putendl("\t/!\\ An error occurred");
+}
+
 static void	ft_search_in_list(t_list *list, t_list **local_env)
 {
 	if (list)
@@ -65,11 +71,14 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 			if (!ft_strcmp(list->data, "env"))
 				ft_putlist(*local_env);
 			if (!ft_strcmp(ft_begin_str(list->data, ' '), "unsetenv"))
-				*local_env = ft_unset_env(local_env, ft_cut_str(list->data, ' '));
+				*local_env = ft_unset_env(local_env,
+						ft_cut_str(list->data, ' '));
 			if (!ft_strcmp(list->data, "exit"))
 				exit(0);
 			if (!ft_strcmp(ft_begin_str(list->data, ' '), "setenv"))
 				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
+			if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
+				ft_exec_cd(list->data);
 			list = list->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 12:04:37 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 19:44:08 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/02 14:38:56 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char *final;
 
-	if (!(s1 && s2))
+	if (!(s1))
 		return (NULL);
+	if (!s2)
+		return (ft_strdup(s1));
 	if ((final = (ft_strnew((ft_strlen(s1)) + (ft_strlen(s2))))))
 	{
 		ft_strcpy(final, (char *)s1);
