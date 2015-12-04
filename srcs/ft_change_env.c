@@ -6,14 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/02 16:35:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/04 17:21:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
-#include <stdio.h>
 
-static char	*ft_get_env(t_list *env, char *str)
+char	*ft_get_env(t_list *env, char *str)
 {
 	int	i;
 
@@ -51,6 +50,7 @@ static void	ft_env(t_list **env)
 
 void		ft_init_env(t_list **local_env, char **env)
 {
+	(void)env;
 	if (env && *env)
 		while (*env)
 		{
@@ -67,8 +67,8 @@ t_list		*ft_unset_env(t_list **env, char *str)
 {
 	t_list	*begin;
 
-	if (!(*env))
-		return (NULL);
+	if (!(env && *env && str))
+		return (*env);
 	begin = ft_unset_env(&((*env)->next), str);
 	if ((ft_strstr((*env)->data, str)))
 	{
@@ -90,8 +90,10 @@ void		ft_setenv(t_list **env, char *str1, char *str2)
 	t_list	*save;
 	char	*tmp;
 
+	if (!(str1 && str2))
+		return ;
 	tmp = ft_strjoin(str1, str2);
-	if (*env)
+	if (env && *env)
 	{
 		save = (*env);
 		while ((*env)->next)

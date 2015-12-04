@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:33:34 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/02 16:31:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/04 17:21:33 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ t_list	*ft_unset_env(t_list **env, char *str);
 void	ft_setenv(t_list **env, char *str1, char *str2);
 char	*ft_begin_str(char *str, char c);
 void	ft_free_list(t_list **list);
+int		ft_fork(t_list *list, t_list **local_env);
+char	*ft_get_env(t_list *env, char *str);
 
 #endif
