@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/04 17:45:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/04 18:11:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		ft_fork(t_list *list, t_list **local_env)
 	while (tab && *tab)
 	{
 		path = ft_strjoin(*tab, *tmp);
-		if (father < 0)
+		if (father > 0)
 		{
 			ft_putendl("lol");
 			return (0);
