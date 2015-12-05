@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 14:26:44 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 15:01:03 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ int		ft_fork(char *path, char **cmd)
 {
 	pid_t	father;
 
+
 	father = fork();
 	if (father > 0)
 	{
+		wait(NULL);
 		return (0);
 	}
 	else if (father == 0)
@@ -88,24 +90,17 @@ int		ft_find(char *cmd, t_list **local_env)
 	char	**tmp;
 	char	**tab;
 	char	*path;
-	DIR		*prog;
 
 	tmp = ft_strsplit(cmd, ' ');
-	ft_putendl(ft_get_env(*local_env, "PATH"));
 	path = ft_cut_str(ft_get_env(*local_env, "PATH"), '=');
 	if (!(path))
 		return (-1);
 	tab = ft_strsplit(path, ':');
 	while (tab && *tab)
 	{
-		path = ft_strjoin(*tab, *tmp);
-		if ((prog = opendir(path)))
-		{
-			if (!readdir(prog))
-				closedir(prog);
-			else
+		path = ft_strjoin(*tab, ft_strjoin("/", *tmp));
+		if (access(path, F_OK) != -1)
 				return (ft_fork(path, tmp));
-		}
 		++tab;
 	}
 	free(path);

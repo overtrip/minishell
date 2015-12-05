@@ -6,15 +6,15 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:33:34 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 14:23:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 15:00:55 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_1_H
 # define SH_1_H
 # include <unistd.h>
-# include <dirent.h>
 # include <pwd.h>
+# include <sys/wait.h>
 # include "libft.h"
 
 t_list	*ft_create_elem(char *data);
