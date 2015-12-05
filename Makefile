@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/12/04 16:43:12 by jealonso         ###   ########.fr        #
+#    Updated: 2015/12/05 13:08:50 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,10 @@ HEAD	= $(patsubst %.h, $(INCPATH)/%.h, $(HFILES))
 all: $(LIBFT) $(OBJSPATH) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) -g $(CFLAGS) $(LDFLAGS) -o $@ $^
+	@$(CC) -g3 $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 $(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HEAD)
-	@$(CC) -g -c $(CFLAGS) $(PATHLIB) -o $@ $<
+	@$(CC) -c $(CFLAGS) $(PATHLIB) -o $@ $<
 
 clean:
 	@$(MAKE) -C $(LFTPATH) clean

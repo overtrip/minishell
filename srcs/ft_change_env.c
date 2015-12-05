@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/04 17:21:07 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 13:44:36 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		ft_setenv(t_list **env, char *str1, char *str2)
 	t_list	*save;
 	char	*tmp;
 
-	if (!(str1 && str2))
+	if (!str1)
 		return ;
 	tmp = ft_strjoin(str1, str2);
 	if (env && *env)

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 18:29:58 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 14:49:34 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 13:13:57 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	ft_num_substr(char const *str, char c)
 	while (str[i])
 	{
 		if (!ft_issep(str[i], c) && (i == 0 || ft_issep(str[i - 1], c)))
-			num_str++;
-		i++;
+			++num_str;
+		++i;
 	}
 	return (num_str);
 }
@@ -56,7 +56,7 @@ static void	ft_put_words(char const *s, char **tab, char c)
 			begin = NULL;
 			end = NULL;
 		}
-		i++;
+		++i;
 	}
 }
 

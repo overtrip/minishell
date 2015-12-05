@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/04 17:11:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 14:21:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
 				ft_exec_cd(list->data);
-			else if (ft_fork(list->data, (*local_env)->data) < 0)
+			else if (ft_find(list->data, local_env) < 0)
 				ft_putendl("lol");
 			//TODO create execve function
 			list = list->next;

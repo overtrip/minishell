@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/04 18:11:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 14:26:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,44 @@ static void ft_free_tab(char **tab)
 	free(tab);
 }
 
-int		ft_fork(t_list *list, t_list **local_env)
+int		ft_fork(char *path, char **cmd)
 {
-	char	**tmp;
-	char	*path;
-	char	**tab;
 	pid_t	father;
 
-	tmp = ft_strsplit(list->data, ' ');
+	father = fork();
+	if (father > 0)
+	{
+		return (0);
+	}
+	else if (father == 0)
+		execve(path, cmd, NULL);
+	return (0);
+}
+
+int		ft_find(char *cmd, t_list **local_env)
+{
+	char	**tmp;
+	char	**tab;
+	char	*path;
+	DIR		*prog;
+
+	tmp = ft_strsplit(cmd, ' ');
+	ft_putendl(ft_get_env(*local_env, "PATH"));
 	path = ft_cut_str(ft_get_env(*local_env, "PATH"), '=');
 	if (!(path))
 		return (-1);
 	tab = ft_strsplit(path, ':');
-	father = fork();
 	while (tab && *tab)
 	{
 		path = ft_strjoin(*tab, *tmp);
-		if (father > 0)
+		if ((prog = opendir(path)))
 		{
-			ft_putendl("lol");
-			return (0);
+			if (!readdir(prog))
+				closedir(prog);
+			else
+				return (ft_fork(path, tmp));
 		}
-		if (father == 0)
-			execve(path, &(*++tmp),NULL);
+		++tab;
 	}
 	free(path);
 	ft_free_tab(tab);
