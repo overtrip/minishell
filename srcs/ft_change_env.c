@@ -6,22 +6,19 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 13:44:36 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 18:07:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
 
-char	*ft_get_env(t_list *env, char *str)
+char		*ft_get_env(t_list *env, char *str)
 {
-	int	i;
-
-	i = 0;
 	if (env)
-		while (env->next)
+		while (env)
 		{
-			if (ft_strstr(env->data, str))
-				return (str);
+			if (ft_strnequ(env->data, str, ft_strlen(str)))
+				return (env->data);
 			env = env->next;
 		}
 	return (NULL);
@@ -50,7 +47,6 @@ static void	ft_env(t_list **env)
 
 void		ft_init_env(t_list **local_env, char **env)
 {
-	(void)env;
 	if (env && *env)
 		while (*env)
 		{
@@ -70,7 +66,7 @@ t_list		*ft_unset_env(t_list **env, char *str)
 	if (!(env && *env && str))
 		return (*env);
 	begin = ft_unset_env(&((*env)->next), str);
-	if ((ft_strstr((*env)->data, str)))
+	if (ft_strnequ((*env)->data, str, ft_strlen(str)))
 	{
 		free((*env)->data);
 		free((*env));
@@ -86,20 +82,20 @@ t_list		*ft_unset_env(t_list **env, char *str)
 
 void		ft_setenv(t_list **env, char *str1, char *str2)
 {
-	t_list	*new;
 	t_list	*save;
 	char	*tmp;
+	char	*env_val;
 
 	if (!str1)
 		return ;
 	tmp = ft_strjoin(str1, str2);
+	env_val = ft_strndup(str1, ft_strchr(str1, '=') - str1);
 	if (env && *env)
 	{
 		save = (*env);
 		while ((*env)->next)
 		{
-			if (ft_strstr((*env)->data,
-						ft_strndup(str1, ft_strchr(str1, '=') - str1)))
+			if (ft_strnequ((*env)->data, env_val, ft_strlen(env_val)))
 			{
 				(*env)->data = ft_strdup(str1);
 				*env = save;
@@ -109,8 +105,6 @@ void		ft_setenv(t_list **env, char *str1, char *str2)
 		}
 		(*env) = save;
 	}
-	new = ft_create_elem(tmp);
-	new->next = *env;
-	*env = new;
+	ft_lstadd(env, ft_create_elem(tmp));
 	free(tmp);
 }

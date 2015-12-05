@@ -6,13 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/20 17:29:12 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 15:01:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 18:56:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_1.h"
 
-int		ft_count_env(char **env)
+int			ft_count_env(char **env)
 {
 	int	count;
 
@@ -23,7 +23,7 @@ int		ft_count_env(char **env)
 	return (count);
 }
 
-char	*ft_cut_str(char *str, char c)
+char		*ft_cut_str(char *str, char c)
 {
 	char	*ptr;
 
@@ -36,7 +36,7 @@ char	*ft_cut_str(char *str, char c)
 		return (ptr);
 }
 
-char	*ft_begin_str(char *str, char c)
+char		*ft_begin_str(char *str, char c)
 {
 	char	*begin;
 	int		size;
@@ -49,7 +49,7 @@ char	*ft_begin_str(char *str, char c)
 	return (ft_strndup(begin, size));
 }
 
-void	ft_free_list(t_list **list)
+void		ft_free_list(t_list **list)
 {
 	t_list	*tmp;
 
@@ -62,17 +62,22 @@ void	ft_free_list(t_list **list)
 	}
 }
 
-static void ft_free_tab(char **tab)
+static void	ft_free_tab(char **tab)
 {
-	while (tab && *tab)
-		free(*tab);
+	int		i;
+
+	i = 0;
+	while (tab && tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
 	free(tab);
 }
 
-int		ft_fork(char *path, char **cmd)
+int			ft_fork(char *path, char **cmd)
 {
 	pid_t	father;
-
 
 	father = fork();
 	if (father > 0)
@@ -80,31 +85,38 @@ int		ft_fork(char *path, char **cmd)
 		wait(NULL);
 		return (0);
 	}
-	else if (father == 0)
+	if (father == 0)
+	{
 		execve(path, cmd, NULL);
-	return (0);
+		exit(EXIT_SUCCESS);
+	}
+	return (-1);
 }
 
-int		ft_find(char *cmd, t_list **local_env)
+int			ft_find(char *cmd, t_list **local_env)
 {
 	char	**tmp;
 	char	**tab;
+	char	**tab_save;
 	char	*path;
+	char	*save;
 
+	save = NULL;
 	tmp = ft_strsplit(cmd, ' ');
 	path = ft_cut_str(ft_get_env(*local_env, "PATH"), '=');
 	if (!(path))
 		return (-1);
 	tab = ft_strsplit(path, ':');
+	tab_save = tab;
 	while (tab && *tab)
 	{
-		path = ft_strjoin(*tab, ft_strjoin("/", *tmp));
+		save = ft_strjoin(*tab, ft_strjoin("/", *tmp));
 		if (access(path, F_OK) != -1)
-				return (ft_fork(path, tmp));
+	ft_fork(path, tmp);
 		++tab;
 	}
-	free(path);
-	ft_free_tab(tab);
+	free(save);
+	ft_free_tab(tab_save);
 	ft_free_tab(tmp);
 	return (0);
 }

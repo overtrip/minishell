@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/12/05 13:08:50 by jealonso         ###   ########.fr        #
+#    Updated: 2015/12/05 18:51:12 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ LIBFT		= $(LFTPATH)/libft.a
 
 #FLAGS:
 LDFLAGS		= -L $(LFTPATH) -lft
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -O3
 PATHLIB		= -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 
 #EXECUTALE:

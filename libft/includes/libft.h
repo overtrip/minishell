@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 15:55:26 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/05 17:09:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int					ft_islower(int c);
 int					ft_isprint(int c);
 int					ft_isupper(int c);
 char				*ft_itoa(int n);
+void				ft_lstadd(t_list **env, t_list *new);
 void				ft_list_push_back(t_list **list, t_list *new);
 void				*ft_memalloc(size_t size);
 void				*ft_memccpy(void *s1, const void *s2, int c, size_t n);
