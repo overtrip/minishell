@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 18:07:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/06 17:40:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		ft_setenv(t_list **env, char *str1, char *str2)
 		{
 			if (ft_strnequ((*env)->data, env_val, ft_strlen(env_val)))
 			{
-				(*env)->data = ft_strdup(str1);
+				(*env)->data = ft_strdup(tmp);
 				*env = save;
 				return ;
 			}

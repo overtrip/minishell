@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 18:55:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/06 17:44:01 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_lex(char *buff, t_list **list)
 	if (!*buff)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
-
+#include <stdio.h>
 static void	ft_exec_cd(char *cd, t_list **local_env)
 {
 	char	*prompt;
@@ -74,7 +74,9 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 			else if (ft_find(list->data, local_env) < 0)
 				ft_putendl("lol");
 			else if (ft_strcmp(list->data, ""))
+			{
 				ft_putendl("command not found");
+			}
 			list = list->next;
 		}
 	}
