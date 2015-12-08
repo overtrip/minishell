@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:33:34 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/05 15:00:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/08 16:53:26 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <pwd.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include "libft.h"
 
 t_list	*ft_create_elem(char *data);

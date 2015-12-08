@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/06 17:44:01 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/08 18:07:25 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	ft_lex(char *buff, t_list **list)
 	if (!*buff)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
-#include <stdio.h>
+
 static void	ft_exec_cd(char *cd, t_list **local_env)
 {
 	char	*prompt;
@@ -73,7 +73,7 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 				ft_exec_cd(list->data, local_env);
 			else if (ft_find(list->data, local_env) < 0)
 				ft_putendl("lol");
-			else if (ft_strcmp(list->data, ""))
+			else if (!ft_strcmp(list->data, ""))
 			{
 				ft_putendl("command not found");
 			}
@@ -93,6 +93,25 @@ static void	ft_print_prompt(t_list *local_env)
 	free(prompt);
 }
 
+void		ft_sig_ctrl_c(int sig)
+{
+	char	c;
+
+	if (sig == SIGINT)
+		ft_putstr("Do you really want to quit? [y/n] ");
+	if ( 1 != read(0, &c, 1))
+		ft_putendl("Am error occurred with read function");
+	if (c == 'Y' || c == 'y')
+		exit(0);
+	else
+		ft_sig_ctrl_c(sig);
+}
+
+void		ft_sig()
+{
+	signal(SIGINT, ft_sig_ctrl_c);
+}
+
 int			main(int argc, char **argv, char **env)
 {
 	char	*buff;
@@ -107,6 +126,7 @@ int			main(int argc, char **argv, char **env)
 	ft_init_env(&local_env, env);
 	while (1)
 	{
+		ft_sig();
 		ft_print_prompt(local_env);
 		if (get_next_line(0, &buff) > 0)
 		{
