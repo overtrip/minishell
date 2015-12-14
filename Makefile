@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/12/05 18:51:12 by jealonso         ###   ########.fr        #
+#    Updated: 2015/12/14 17:44:22 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,12 @@ NAME 		= ft_minishell
 
 #SRCRS:
 SRCS 		= \
-	   	main.c \
-		ft_change_env.c \
-	   	ft_display_env.c \
+			builtins.c \
+			ft_change_env.c \
+			ft_display_env.c \
+			ft_fork.c \
+			main.c \
+			sig.c \
 
 #OBJ:
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))

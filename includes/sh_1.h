@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:33:34 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/14 17:19:47 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:45:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	ft_setenv(t_list **env, char *str1, char *str2);
 char	*ft_begin_str(char *str, char c);
 void	ft_free_list(t_list **list);
 int		ft_find(char *list, t_list **local_env);
-int		ft_fork(char *path, char **cmd);
 char	*ft_get_env(t_list *env, char *str);
+void	ft_exec_cd(char *cd, t_list **local_env);
+void    ft_free_tab(char **tab);
+void	ft_sig(void);
 
 #endif
