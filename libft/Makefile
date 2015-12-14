@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2015/12/05 18:51:30 by jealonso         ###   ########.fr        #
+#    Updated: 2015/12/13 16:58:29 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,11 +88,13 @@ SRCS = \
 	ft_strstr.c \
 	ft_strsub.c \
 	ft_strtrim.c \
+	ft_swap.c \
+	ft_swap_str.c \
 	ft_tolower.c \
 	ft_toupper.c \
 	get_next_line.c
 
-CFLAGS = -Wall -Werror -Wextra -O3 -I $(INCPATH)
+CFLAGS = -Wall -Werror -Wextra -I $(INCPATH)
 
 COBJS =  $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
 
