@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/14 17:39:14 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/16 16:30:13 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int			main(int argc, char **argv, char **env)
 			ft_lex(buff, &list);
 			ft_search_in_list(list, &local_env);
 		}
+		else
+			ft_sig_kill();
 		free(buff);
 		ft_free_list(&list);
 	}

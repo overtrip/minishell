@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:33:34 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/14 17:45:17 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/16 16:30:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <pwd.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <stdio.h>
 # include "libft.h"
 
 t_list	*ft_create_elem(char *data);
@@ -30,7 +31,8 @@ void	ft_free_list(t_list **list);
 int		ft_find(char *list, t_list **local_env);
 char	*ft_get_env(t_list *env, char *str);
 void	ft_exec_cd(char *cd, t_list **local_env);
-void    ft_free_tab(char **tab);
+void	ft_free_tab(char **tab);
 void	ft_sig(void);
+void	ft_sig_kill(void);
 
 #endif
