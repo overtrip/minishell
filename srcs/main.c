@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/16 16:30:13 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/16 17:48:19 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
 				ft_exec_cd(list->data, local_env);
 			else if (ft_find(list->data, local_env) < 0)
-				ft_putendl("lol");
-			else if (!ft_strcmp(list->data, ""))
+				ft_putendl("\tYou doesn't have a path sorry brow.");
+			else if (ft_strcmp(list->data, ""))
 				ft_putendl("command not found");
 			list = list->next;
 		}

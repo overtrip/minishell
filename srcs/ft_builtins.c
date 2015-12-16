@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:35:28 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/14 17:58:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/16 17:59:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	ft_back(t_list **local_env)
 	old_prompt = ft_cut_str(ft_get_env(*local_env, "OLDPWD"), '=');
 	ft_setenv(local_env, "PWD=", old_prompt);
 	ft_setenv(local_env, "OLDPWD=", prompt);
+	ft_putendl(old_prompt);
 	if (chdir(old_prompt) < 0)
 		ft_putendl("\t/!\\ An error occurred");
 }

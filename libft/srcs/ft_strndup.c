@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 17:57:22 by jealonso          #+#    #+#             */
-/*   Updated: 2015/11/29 15:49:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/16 17:30:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strndup(const char *s1, int count)
 
 	s2 = NULL;
 	save = count;
+	if (save <= 0)
+		return (NULL);
 	if ((s2 = (char *)malloc(sizeof(char) * ++count)))
 		while (s1 && *s1 && --count)
 		{
