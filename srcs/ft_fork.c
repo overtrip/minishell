@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:40:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/16 17:45:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/18 16:05:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,27 @@ int			ft_find(char *cmd, t_list **local_env)
 	free(save);
 	ft_free_tab(tmp);
 	return (0);
+}
+
+int			ft_check(char *cmd, t_list **local_env)
+{
+	char	**tmp;
+	char	**tab;
+	char	*save;
+	int		valide;
+
+	save = NULL;
+	valide = 1;
+	tmp = ft_strsplit(cmd, ' ');
+	tab = ft_strsplit(ft_cut_str(ft_get_env(*local_env, "PATH"), '='), ':');
+	while (tab && *tab)
+	{
+		save = ft_strjoin(*tab, ft_strjoin("/", *tmp));
+		if (access(save, F_OK) != -1)
+			valide = 0;
+		++tab;
+	}
+	free(save);
+	ft_free_tab(tmp);
+	return (valide);
 }

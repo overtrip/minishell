@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/16 17:48:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/18 16:04:30 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	ft_my_split_list(t_list **list, char *buff, int size)
 {
 	char	*tmp;
 
+	if (!(buff - 1) || !size)
+		return ;
 	if (!(tmp = ft_strndup(buff, size)))
 		return ;
 	ft_list_push_back(list, ft_create_elem(ft_strtrim(tmp)));
@@ -39,7 +41,7 @@ static void	ft_lex(char *buff, t_list **list)
 		}
 		++buff;
 	}
-	if (!*buff)
+	if (!*buff && *tmp)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
 
@@ -62,7 +64,7 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 				ft_exec_cd(list->data, local_env);
 			else if (ft_find(list->data, local_env) < 0)
 				ft_putendl("\tYou doesn't have a path sorry brow.");
-			else if (ft_strcmp(list->data, ""))
+			else if (ft_check(list->data, local_env) == 1)
 				ft_putendl("command not found");
 			list = list->next;
 		}

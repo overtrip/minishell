@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 17:51:39 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/02 17:38:37 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/17 15:45:05 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putlist(t_list *list)
 	t_list	*begin;
 
 	begin = list;
-	if (list)
+	if (begin)
 	{
 		while (list->next)
 		{

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:30:24 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/16 16:49:51 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/12/18 15:08:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void		ft_sig_kill(void)
 {
 	char	c;
 
-	ft_putstr("\n\t");
-	ft_putstr("Are you sure to exit programe ? [Y/n]");
+	ft_putstr("\n\tAre you sure to exit programe ? [Y/n]");
 	if (1 != read(0, &c, 1))
 		ft_sig_kill();
 	if (c == '\n' || c == 'Y' || c == 'y')
