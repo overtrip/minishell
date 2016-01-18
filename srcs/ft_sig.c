@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:30:24 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/18 15:08:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/18 15:40:35 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static void	ft_sig_ctrl_z(int sig)
 	tmp = ft_strjoin(getcwd(NULL, 42), " ");
 	if (sig == SIGTSTP)
 	{
-		ft_putstr("\n\t");
-		ft_putendl("You press to suspend execution but ignored");
+		ft_putstr("\n\tYou press to suspend execution but ignored\n");
 		ft_putstr(tmp);
 	}
 	free(tmp);
@@ -47,10 +46,7 @@ static void	ft_sig_ctrl_b(int sig)
 	char	c;
 
 	if (sig == SIGQUIT)
-	{
-		ft_putstr("\n\t");
-		ft_putstr("Do you really want to terminate and dump core? [Y/n] ");
-	}
+		ft_putstr("\n\tDo you really want to terminate and dump core? [Y/n] ");
 	if (1 != read(0, &c, 1))
 		ft_putendl("Am error occurred with read function");
 	if (c == '\n' || c == 'Y' || c == 'y')
