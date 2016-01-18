@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:40:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/18 18:01:49 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/18 18:00:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ int			ft_check(char *cmd, t_list **local_env)
 	{
 		save = ft_strjoin(*tab, ft_strjoin("/", *tmp));
 		if (access(save, F_OK) != -1)
+		{
+			ft_putendl(save);
+			//TODO trouver pourquoi ./ nest pas compris comme une commande valide
+			//exemple ./../ft_ls/ft_ls
 			valide = 0;
+		}
 		++tab;
 	}
 	free(save);

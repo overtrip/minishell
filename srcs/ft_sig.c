@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:30:24 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/18 15:40:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/18 17:23:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	ft_sig_ctrl_z(int sig)
 		ft_putstr(tmp);
 	}
 	free(tmp);
-	return ;
 }
 
 static void	ft_sig_ctrl_c(int sig)
@@ -38,7 +37,6 @@ static void	ft_sig_ctrl_c(int sig)
 		ft_putstr(tmp);
 	}
 	free(tmp);
-	return ;
 }
 
 static void	ft_sig_ctrl_b(int sig)
@@ -62,8 +60,7 @@ void		ft_sig_kill(void)
 		ft_sig_kill();
 	if (c == '\n' || c == 'Y' || c == 'y')
 		exit(0);
-	else
-		return ;
+	read(0, &c, 1);
 }
 
 void		ft_sig(void)
