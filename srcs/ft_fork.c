@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:40:13 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/18 18:00:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/19 16:57:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	ft_fork(char *path, char **cmd, t_list **local_env)
 	return (-1);
 }
 
-int			ft_find(char *cmd, t_list **local_env)
+int			ft_find(char *cmd, t_list **local_env, int valide)
 {
 	char	**tmp;
 	char	**tab;
@@ -71,39 +71,17 @@ int			ft_find(char *cmd, t_list **local_env)
 		return (-1);
 	tab = ft_strsplit(path, ':');
 	if (access(tmp[0], X_OK) != -1)
-		ft_fork(tmp[0], tmp, local_env);
-	while (tab && *tab)
 	{
-		save = ft_strjoin(*tab, ft_strjoin("/", *tmp));
-		if (access(save, F_OK) != -1)
-			ft_fork(save, tmp, local_env);
-		++tab;
+		ft_fork(tmp[0], tmp, local_env);
+		return (1);
 	}
-	free(save);
-	ft_free_tab(tmp);
-	return (0);
-}
-
-int			ft_check(char *cmd, t_list **local_env)
-{
-	char	**tmp;
-	char	**tab;
-	char	*save;
-	int		valide;
-
-	save = NULL;
-	valide = 1;
-	tmp = ft_strsplit(cmd, ' ');
-	tab = ft_strsplit(ft_cut_str(ft_get_env(*local_env, "PATH"), '='), ':');
 	while (tab && *tab)
 	{
 		save = ft_strjoin(*tab, ft_strjoin("/", *tmp));
 		if (access(save, F_OK) != -1)
 		{
-			ft_putendl(save);
-			//TODO trouver pourquoi ./ nest pas compris comme une commande valide
-			//exemple ./../ft_ls/ft_ls
-			valide = 0;
+			ft_fork(save, tmp, local_env);
+			valide = 1;
 		}
 		++tab;
 	}

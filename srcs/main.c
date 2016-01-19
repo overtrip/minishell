@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/18 17:54:19 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/19 16:57:42 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 static void	ft_my_split_list(t_list **list, char *buff, int size)
 {
 	char	*tmp;
+	char	*tmp_2;
 
 	if (!(buff - 1) || !size)
 		return ;
 	if (!(tmp = ft_strndup(buff, size)))
 		return ;
-	ft_list_push_back(list, ft_create_elem(ft_strtrim(tmp)));
+	tmp_2 = ft_strtrim(tmp);
+	if (ft_strlen(tmp_2))
+		ft_list_push_back(list, ft_create_elem(tmp_2));
 }
 
 static void	ft_lex(char *buff, t_list **list)
@@ -62,10 +65,8 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
 				ft_exec_cd(list->data, local_env);
-			else if (ft_find(list->data, local_env) < 0)
-				ft_putendl("\tYou doesn't have a path sorry brow.");
-			else if (ft_check(list->data, local_env) == 1)
-				ft_putendl("command not found");
+			else if (ft_find(list->data, local_env, 0) < 1)
+				ft_putendl("\tcommand not found");
 			list = list->next;
 		}
 	}
