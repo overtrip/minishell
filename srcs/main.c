@@ -48,6 +48,22 @@ static void	ft_lex(char *buff, t_list **list)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
 
+static void	ft_replace(t_list *list, t_list *local_env)
+{
+	char	*tmp;
+	char	*env;
+
+	if((env = ft_cut_str(ft_get_env(local_env, "HOME="), '=')))
+		if (list)
+		{
+			tmp = ft_strjoin("cd ",
+					ft_strjoin(env, ft_strstr(list->data, "~/") + 1));
+			free(list->data);
+			list->data = ft_strdup(tmp);
+			free(tmp);
+		}
+}
+
 static void	ft_search_in_list(t_list *list, t_list **local_env)
 {
 	if (list)
@@ -56,6 +72,8 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 		{
 			if (!ft_strcmp(list->data, "env"))
 				ft_putlist(*local_env);
+			if (!ft_strcmp(list->data, "~/"))
+				ft_replace(list, *local_env);
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "unsetenv"))
 				*local_env = ft_unset_env(local_env,
 						ft_cut_str(list->data, ' '));
@@ -64,7 +82,8 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "setenv"))
 				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
-				ft_exec_cd(list->data, local_env);
+				ft_exec_cd(list->data, local_env,
+						ft_cut_str(ft_get_env(*local_env, "HOME="), '='));
 			else if (ft_find(list->data, local_env, 0) < 1)
 				ft_putendl("\tcommand not found");
 			list = list->next;

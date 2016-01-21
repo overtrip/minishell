@@ -18,6 +18,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include "libft.h"
+# define PATH "/nfs/zfs-student-3/users/jealonso"
 
 t_list	*ft_create_elem(char *data);
 void	ft_display_env(t_list *env);
@@ -30,7 +31,7 @@ char	*ft_begin_str(char *str, char c);
 void	ft_free_list(t_list **list);
 int		ft_find(char *list, t_list **local_env, int valide);
 char	*ft_get_env(t_list *env, char *str);
-void	ft_exec_cd(char *cd, t_list **local_env);
+void	ft_exec_cd(char *cd, t_list **local_env, char *home);
 void	ft_free_tab(char **tab);
 void	ft_sig(void);
 void	ft_sig_kill(void);
