@@ -36,5 +36,6 @@ void	ft_free_tab(char **tab);
 void	ft_sig(void);
 void	ft_sig_kill(void);
 int		ft_check(char *list, t_list **local_env);
+char	*ft_absolue(t_list *local_env);
 
 #endif

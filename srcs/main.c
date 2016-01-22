@@ -61,13 +61,13 @@ static void	ft_replace(t_list *list, t_list *local_env)
 		first = list->data;
 		save = ft_strdup(ft_strstr(list->data, "~") + 1);
 		free(list->data);
-		env = ft_get_env(local_env, "HOME=") ?
-			ft_cut_str(ft_get_env(local_env, "HOME="), '=') : PATH;
+		env = ft_absolue(local_env);
 		if ((*save) == '/' || !(*save))
 			tmp = ft_strjoin(ft_strjoin(begin, env), save);
 		else
 			tmp = ft_strdup(first);
 		list->data = ft_strdup(tmp);
+		ft_putendl(list->data);
 		free(tmp);
 		free(save);
 	}
@@ -84,7 +84,10 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 			if (ft_strstr(list->data, "~"))
 			{
 				ft_replace(list, *local_env);
-		ft_putendl(list->data);
+	//TODO Comprendre pourquoi en laissant comme ca c'est ok.
+	//Mais part en boucle infini avec azerty~uiop.
+	//Si on enleve le continue alors cd ~/42 ne fonctionne plus.
+				continue ;
 			}
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "unsetenv"))
 				*local_env = ft_unset_env(local_env,
@@ -94,8 +97,7 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "setenv"))
 				ft_setenv(local_env, ft_cut_str(list->data, ' '), NULL);
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "cd"))
-				ft_exec_cd(list->data, local_env,
-						ft_cut_str(ft_get_env(*local_env, "HOME="), '='));
+				ft_exec_cd(list->data, local_env, ft_absolue(*local_env));
 			else if (ft_find(list->data, local_env, 0) < 1)
 				ft_putendl("\tcommand not found");
 			list = list->next;

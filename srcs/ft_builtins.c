@@ -38,24 +38,22 @@ void		ft_exec_cd(char *cd, t_list **local_env, char *home)
 	char	*tmp;
 
 	tmp = ft_cut_str(cd, ' ');
-	if (!tmp || (*tmp == '~' && !(*tmp + 1)) || *tmp == '-')
+	if (!tmp || *tmp == '-')
 	{
-		if (!tmp || *tmp == '~')
+		if (!tmp)
 		{
 			ft_setenv(local_env, "PWD=", getcwd(NULL, 42));
 			ft_setenv(local_env, "OLDPWD=", getcwd(NULL, 42));
 			if (chdir(home) < 0)
-				chdir(PATH);
+				ft_putendl("\t/!\\ An error occurred");
 		}
 		else
 			ft_back(local_env);
 	}
 	else
 	{
-		if ((chdir(ft_strjoin(home, ft_cut_str(tmp, '~'))) < 0))
+		if (chdir(ft_cut_str(cd, ' ')) < 0)
 			ft_putendl("\t/!\\ An error occurred");
-		else
-			chdir(ft_strjoin(PATH, ft_cut_str(tmp, '~')));
 	}
 	prompt = getcwd(NULL, 42);
 	ft_setenv(local_env, "PWD=", prompt);

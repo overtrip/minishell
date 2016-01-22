@@ -63,3 +63,9 @@ void	ft_free_tab(char **tab)
 	}
 	free(tab);
 }
+
+char	*ft_absolue(t_list *local_env)
+{
+	return (ft_get_env(local_env, "HOME=") ?
+			ft_cut_str(ft_get_env(local_env, "HOME="),  '=') : PATH);
+}
