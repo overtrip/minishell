@@ -50,18 +50,27 @@ static void	ft_lex(char *buff, t_list **list)
 
 static void	ft_replace(t_list *list, t_list *local_env)
 {
-	char	*tmp;
+	char	*save;
 	char	*env;
+	char	*begin;
+	char	*tmp;
+	char	*first;
 
-	if((env = ft_cut_str(ft_get_env(local_env, "HOME="), '=')))
-		if (list)
-		{
-			tmp = ft_strjoin("cd ",
-					ft_strjoin(env, ft_strstr(list->data, "~/") + 1));
-			free(list->data);
-			list->data = ft_strdup(tmp);
-			free(tmp);
-		}
+	if ((begin = ft_begin_str(list->data, '~')))
+	{
+		first = list->data;
+		save = ft_strdup(ft_strstr(list->data, "~") + 1);
+		free(list->data);
+		env = ft_get_env(local_env, "HOME=") ?
+			ft_cut_str(ft_get_env(local_env, "HOME="), '=') : PATH;
+		if ((*save) == '/' || !(*save))
+			tmp = ft_strjoin(ft_strjoin(begin, env), save);
+		else
+			tmp = ft_strdup(first);
+		list->data = ft_strdup(tmp);
+		free(tmp);
+		free(save);
+	}
 }
 
 static void	ft_search_in_list(t_list *list, t_list **local_env)
@@ -72,8 +81,11 @@ static void	ft_search_in_list(t_list *list, t_list **local_env)
 		{
 			if (!ft_strcmp(list->data, "env"))
 				ft_putlist(*local_env);
-			if (!ft_strcmp(list->data, "~/"))
+			if (ft_strstr(list->data, "~"))
+			{
 				ft_replace(list, *local_env);
+		ft_putendl(list->data);
+			}
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "unsetenv"))
 				*local_env = ft_unset_env(local_env,
 						ft_cut_str(list->data, ' '));
