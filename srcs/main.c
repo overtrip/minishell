@@ -21,8 +21,8 @@ static void	ft_my_split_list(t_list **list, char *buff, int size)
 		return ;
 	if (!(tmp = ft_strndup(buff, size)))
 		return ;
-	//tmp_2 = ft_strtrim(tmp);
-	tmp_2 = ft_remove_msp(tmp);
+	tmp_2 = ft_strtrim(tmp);
+//	tmp_2 = ft_remove_msp(tmp);
 	if (ft_strlen(tmp_2))
 		ft_list_push_back(list, ft_create_elem(tmp_2));
 }
