@@ -21,7 +21,8 @@ static void	ft_my_split_list(t_list **list, char *buff, int size)
 		return ;
 	if (!(tmp = ft_strndup(buff, size)))
 		return ;
-	tmp_2 = ft_strtrim(tmp);
+	//tmp_2 = ft_strtrim(tmp);
+	tmp_2 = ft_remove_msp(tmp);
 	if (ft_strlen(tmp_2))
 		ft_list_push_back(list, ft_create_elem(tmp_2));
 }
@@ -48,30 +49,6 @@ static void	ft_lex(char *buff, t_list **list)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
 
-static void	ft_replace(t_list *list, t_list *local_env)
-{
-	char	*save;
-	char	*env;
-	char	*begin;
-	char	*tmp;
-	char	*first;
-
-	if ((begin = ft_begin_str(list->data, '~')))
-	{
-		first = list->data;
-		save = ft_strdup(ft_strstr(list->data, "~") + 1);
-		free(list->data);
-		env = ft_absolue(local_env);
-		if ((*save) == '/' || !(*save))
-			tmp = ft_strjoin(ft_strjoin(begin, env), save);
-		else
-			tmp = ft_strdup(first);
-		list->data = ft_strdup(tmp);
-		ft_putendl(list->data);
-		free(tmp);
-		free(save);
-	}
-}
 
 static void	ft_search_in_list(t_list *list, t_list **local_env)
 {

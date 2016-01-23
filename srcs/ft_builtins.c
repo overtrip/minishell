@@ -59,3 +59,53 @@ void		ft_exec_cd(char *cd, t_list **local_env, char *home)
 	ft_setenv(local_env, "PWD=", prompt);
 	free(prompt);
 }
+
+char        *ft_remove_msp(char *to_cut)
+{
+	char    *str_new;
+	char    *str;
+	int        i;
+
+	i = -1;
+	str = NULL;
+	str_new = ft_strtrim(to_cut);
+	while (str_new && *str_new)
+	{
+		if (*str_new != ' ')
+		{
+			if (*(str_new - 1) == ' ' || *(str_new - 1) == '\t')
+				str[++i] = ' ';
+			str[++i] = *str_new;
+		}
+		++str_new;
+	}
+	str[++i] = '\0';
+	free(str_new);
+	return (str);
+}
+
+void		ft_replace(t_list *list, t_list *local_env)
+{
+	char	*save;
+	char	*env;
+	char	*begin;
+	char	*tmp;
+	char	*first;
+
+	if ((begin = ft_begin_str(list->data, '~')))
+	{
+		first = list->data;
+		save = ft_strdup(ft_strstr(list->data, "~") + 1);
+		free(list->data);
+		env = ft_absolue(local_env);
+		if ((*save) == '/' || !(*save))
+			tmp = ft_strjoin(ft_strjoin(begin, env), save);
+		else
+			tmp = ft_strdup(first);
+		list->data = ft_strdup(tmp);
+		ft_putendl(list->data);
+		free(tmp);
+		free(save);
+	}
+}
+

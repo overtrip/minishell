@@ -54,7 +54,7 @@ static int	ft_fork(char *path, char **cmd, t_list **local_env)
 		ft_free_tab(env);
 		exit(EXIT_SUCCESS);
 	}
-	return (-1);
+	return (1);
 }
 
 int			ft_find(char *cmd, t_list **local_env, int valide)
@@ -71,19 +71,16 @@ int			ft_find(char *cmd, t_list **local_env, int valide)
 		return (-1);
 	tab = ft_strsplit(path, ':');
 	if (access(tmp[0], X_OK) != -1)
-	{
-		ft_fork(tmp[0], tmp, local_env);
-		return (1);
-	}
+		return (ft_fork(tmp[0], tmp, local_env));
 	while (tab && *tab)
 	{
-		save = ft_strjoin(*tab, ft_strjoin("/", *tmp));
+		save = ft_strjoin(*tab++, ft_strjoin("/", *tmp));
 		if (access(save, F_OK) != -1)
 		{
 			ft_fork(save, tmp, local_env);
 			valide = 1;
 		}
-		++tab;
+	//	++tab;
 	}
 	free(save);
 	ft_free_tab(tmp);
