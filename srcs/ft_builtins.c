@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:35:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/25 17:54:50 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/27 18:07:02 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,30 @@ void		ft_exec_cd(char *cd, t_list **local_env, char *home)
 	free(prompt);
 }
 
+char        *ft_remove_msp(char *to_cut)
+{
+	char    *str_new;
+	char    *str;
+	int        i;
+
+	i = -1;
+	str = NULL;
+	str_new = ft_strtrim(to_cut);
+	while (str_new && *str_new)
+	{
+		if (*str_new != ' ')
+		{
+			if (*(str_new - 1) == ' ' || *(str_new - 1) == '\t')
+				str[++i] = ' ';
+			str[++i] = *str_new;
+		}
+		++str_new;
+	}
+	str[++i] = '\0';
+	free(str_new);
+	return (str);
+}
+
 void		ft_replace(t_list *list, t_list *local_env)
 {
 	char	*save;
@@ -79,34 +103,8 @@ void		ft_replace(t_list *list, t_list *local_env)
 		else
 			tmp = ft_strdup(first);
 		list->data = ft_strdup(tmp);
+		ft_putendl(list->data);
 		free(tmp);
 		free(save);
 	}
-}
-
-char		*ft_remove_msp(char *to_cut)
-{
-	char	*str_new;
-	char	*str;
-	char	*save;
-	int		i;
-
-	i = -1;
-	str_new = ft_strtrim(to_cut);
-	save = str_new;
-	if (!(str = ft_strnew(ft_strlen(str_new))))
-		return (NULL);
-	while (str_new && *str_new)
-	{
-		if (*str_new != ' ' && *str_new != '\t')
-		{
-			if ((*(str_new - 1) == ' ' || *(str_new - 1) == '\t'))
-				str[++i] = ' ';
-			str[++i] = *str_new;
-		}
-		++str_new;
-	}
-	str[++i] = '\0';
-	free(save);
-	return (str);
 }
