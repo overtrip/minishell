@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:55:54 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/16 17:09:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/23 14:06:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	ft_free_tab(char **tab)
 char	*ft_absolue(t_list *local_env)
 {
 	return (ft_get_env(local_env, "HOME=") ?
-			ft_cut_str(ft_get_env(local_env, "HOME="),  '=') : PATH);
+			ft_cut_str(ft_get_env(local_env, "HOME="), '=') : PATH);
 }

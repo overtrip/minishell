@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:33:34 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/19 15:44:30 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/23 15:23:30 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	ft_sig(void);
 void	ft_sig_kill(void);
 int		ft_check(char *list, t_list **local_env);
 char	*ft_absolue(t_list *local_env);
-
+void	ft_replace(t_list *list, t_list *local_env);
+char	*ft_remove_msp(char *to_cut);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 14:59:01 by jealonso          #+#    #+#             */
-/*   Updated: 2014/11/09 20:09:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/25 16:20:17 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strtrim(char const *s)
 
 	if (!s)
 		return (NULL);
-	tmp = ft_strnew(ft_strlen(s) + 1);
+	tmp = ft_strnew(ft_strlen(s));
 	pend = (char *)s + (ft_strlen(s) - 1);
 	i = 0;
 	while (*s == ' ' || *s == '\n' || *s == '\t')

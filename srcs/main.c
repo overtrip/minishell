@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/06 15:21:30 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/19 16:57:42 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/27 18:00:00 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_my_split_list(t_list **list, char *buff, int size)
 		return ;
 	if (!(tmp = ft_strndup(buff, size)))
 		return ;
-	tmp_2 = ft_strtrim(tmp);
+	tmp_2 = ft_remove_msp(tmp);
 	if (ft_strlen(tmp_2))
 		ft_list_push_back(list, ft_create_elem(tmp_2));
 }
@@ -48,47 +48,16 @@ static void	ft_lex(char *buff, t_list **list)
 		ft_my_split_list(list, tmp, (buff - tmp));
 }
 
-static void	ft_replace(t_list *list, t_list *local_env)
-{
-	char	*save;
-	char	*env;
-	char	*begin;
-	char	*tmp;
-	char	*first;
-
-	if ((begin = ft_begin_str(list->data, '~')))
-	{
-		first = list->data;
-		save = ft_strdup(ft_strstr(list->data, "~") + 1);
-		free(list->data);
-		env = ft_absolue(local_env);
-		if ((*save) == '/' || !(*save))
-			tmp = ft_strjoin(ft_strjoin(begin, env), save);
-		else
-			tmp = ft_strdup(first);
-		list->data = ft_strdup(tmp);
-		ft_putendl(list->data);
-		free(tmp);
-		free(save);
-	}
-}
-
 static void	ft_search_in_list(t_list *list, t_list **local_env)
 {
 	if (list)
 	{
 		while (list)
 		{
+			if (ft_strchr(list->data, '~'))
+				ft_replace(list, *local_env);
 			if (!ft_strcmp(list->data, "env"))
 				ft_putlist(*local_env);
-			if (ft_strstr(list->data, "~"))
-			{
-				ft_replace(list, *local_env);
-	//TODO Comprendre pourquoi en laissant comme ca c'est ok.
-	//Mais part en boucle infini avec azerty~uiop.
-	//Si on enleve le continue alors cd ~/42 ne fonctionne plus.
-				continue ;
-			}
 			else if (!ft_strcmp(ft_begin_str(list->data, ' '), "unsetenv"))
 				*local_env = ft_unset_env(local_env,
 						ft_cut_str(list->data, ' '));

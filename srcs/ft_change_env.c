@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 17:11:38 by jealonso          #+#    #+#             */
-/*   Updated: 2015/12/18 16:03:24 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/27 17:46:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static void	ft_env(t_list **env)
 
 void		ft_init_env(t_list **local_env, char **env)
 {
+	t_list	*tmp;
+
+	tmp = *local_env;
 	if (env && *env)
 		while (*env)
 		{
