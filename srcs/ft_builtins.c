@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:35:28 by jealonso          #+#    #+#             */
-/*   Updated: 2016/01/27 18:07:02 by jealonso         ###   ########.fr       */
+/*   Updated: 2016/01/29 15:44:58 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		ft_exec_cd(char *cd, t_list **local_env, char *home)
 	char	*tmp;
 
 	tmp = ft_cut_str(cd, ' ');
+	prompt = getcwd(NULL, 42);
 	if (!tmp || *tmp == '-')
 	{
 		if (!tmp)
@@ -54,33 +55,36 @@ void		ft_exec_cd(char *cd, t_list **local_env, char *home)
 	{
 		if (chdir(ft_cut_str(cd, ' ')) < 0)
 			ft_putendl("\t/!\\ An error occurred");
+		ft_setenv(local_env, "OLDPWD=", prompt);
 	}
-	prompt = getcwd(NULL, 42);
-	ft_setenv(local_env, "PWD=", prompt);
+	ft_setenv(local_env, "PWD=", getcwd(NULL, 42));
 	free(prompt);
 }
 
-char        *ft_remove_msp(char *to_cut)
+char		*ft_remove_msp(char *to_cut)
 {
-	char    *str_new;
-	char    *str;
-	int        i;
+	char	*str_new;
+	char	*str;
+	char	*save;
+	int		i;
 
 	i = -1;
-	str = NULL;
 	str_new = ft_strtrim(to_cut);
+	save = str_new;
+	if (!(str = ft_strnew(ft_strlen(str_new))))
+		return (NULL);
 	while (str_new && *str_new)
 	{
-		if (*str_new != ' ')
+		if (*str_new != ' ' && *str_new != '\t')
 		{
-			if (*(str_new - 1) == ' ' || *(str_new - 1) == '\t')
+			if ((*(str_new - 1) == ' ' || *(str_new - 1) == '\t'))
 				str[++i] = ' ';
 			str[++i] = *str_new;
 		}
 		++str_new;
 	}
 	str[++i] = '\0';
-	free(str_new);
+	free(save);
 	return (str);
 }
 
